@@ -1,21 +1,23 @@
 #!/usr/bin/env python3x
 # -*- coding: utf-8 -*-
 
+import re
 import shutil
 from datetime import datetime
 from pathlib import Path
+
 from dulwich import porcelain
-import re
 
 def_repositories = {
     "DBM-wowcircle": {
-    "github_user": "Barsoomx",
-    "repo_name": "DBM-wowcircle",
-    "branch": "master",
-    "folder_glob": r"DBM-*"
+        "github_user": "Barsoomx",
+        "repo_name": "DBM-wowcircle",
+        "branch": "master",
+        "folder_glob": r"DBM-*"
     },
 
 }
+
 
 def fetch_repository(github_user, repo_name, branch='master'):
     repo_path = f"./repositories/{repo_name}"
@@ -41,7 +43,7 @@ def reset_repository_status(repo_path):
 def map_directory(repo_name, folder_glob):
     p = Path("./")
 
-    for child in p.glob('Wow.exe'):
+    for _ in p.glob('Wow.exe'):
         print("UPDATER: directory correct, found Wow.exe")
 
         dt_now = datetime.now().replace(microsecond=0).isoformat().replace(":", "-")
@@ -50,7 +52,7 @@ def map_directory(repo_name, folder_glob):
         backup_path = Path(f"./repositories/{repo_name}-backups/{dt_now}/")
 
         print(f"BACKUP: backing up current {folder_glob} directories")
-        
+
         for child in filter_folders(addons, folder_glob):
             backup_path.mkdir(parents=True, exist_ok=True)
             shutil.move(child, backup_path)
@@ -75,12 +77,12 @@ def copy_repository_files(repo_path, addons_folder, folder_glob):
 def filter_folders(folder, folder_glob):
     folder_list = folder.glob("*")
 
-    return [x for x in folder_list if x.is_dir() and re.fullmatch(folder_glob,x.name)]
+    return [x for x in folder_list if x.is_dir() and re.fullmatch(folder_glob, x.name)]
 
 
 def read_config_file():
     try:
-        with open("./repo_config.conf",'r') as conf:
+        with open("./repo_config.conf", 'r') as conf:
             upd = dict()
             print(f"CONF: found config")
             for line in conf.readlines():
@@ -88,11 +90,11 @@ def read_config_file():
                 github_user, repo_name, branch, folder_glob = [x.strip() for x in line.split(',')]
                 print(f"CONF: found valid config entry: {repo_name}")
                 upd.update({repo_name: {
-                           "github_user": github_user,
-                           "repo_name": repo_name,
-                           "branch": branch,
-                           "folder_glob": r'{folder_glob}'.format(folder_glob=folder_glob)
-                           }})
+                    "github_user": github_user,
+                    "repo_name": repo_name,
+                    "branch": branch,
+                    "folder_glob": r'{folder_glob}'.format(folder_glob=folder_glob)
+                }})
 
         return upd
 
@@ -104,13 +106,17 @@ def read_config_file():
 def main():
     print(f"UPDATER: SPIN UP")
     repositories = read_config_file() or def_repositories
+
     for name, repo_data in repositories.items():
         github_user, repo_name, branch, folder_glob = repo_data.values()
+
         addons_folder = map_directory(repo_name, folder_glob)
         repo_path = fetch_repository(github_user, repo_name, branch)
+
         copy_repository_files(repo_path, addons_folder, folder_glob)
 
     print(f"UPDATER: finished for {repositories}")
+
 
 if __name__ == '__main__':
     main()

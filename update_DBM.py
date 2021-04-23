@@ -7,7 +7,7 @@ from pathlib import Path
 from dulwich import porcelain
 import re
 
-repositories = {
+def_repositories = {
     "DBM-wowcircle": {
     "github_user": "Barsoomx",
     "repo_name": "DBM-wowcircle",
@@ -60,6 +60,7 @@ def map_directory(repo_name, folder_glob):
 
         return addons
 
+    print("UPDATER: directory incorrect, PLEASE place in folder with Wow.exe (WoW root folder)")
     exit(1)
 
 
@@ -97,18 +98,19 @@ def read_config_file():
 
     except FileNotFoundError:
         print(f"CONF: config not found, defaulting to DBM-wowcircle")
-        return dict()
+        return None
 
 
 def main():
     print(f"UPDATER: SPIN UP")
-    repositories.update(read_config_file())
+    repositories = read_config_file() or def_repositories
     for name, repo_data in repositories.items():
         github_user, repo_name, branch, folder_glob = repo_data.values()
         addons_folder = map_directory(repo_name, folder_glob)
         repo_path = fetch_repository(github_user, repo_name, branch)
         copy_repository_files(repo_path, addons_folder, folder_glob)
 
+    print(f"UPDATER: finished for {repositories}")
 
 if __name__ == '__main__':
     main()

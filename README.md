@@ -16,7 +16,7 @@
 
 Скачать .exe файл можно во вкладке "Releases"
 
-## ОБЯЗАТЕЛЬНО ПЕРЕИМЕНОВАТЬ ПРИМЕР repo_config.conf.sample в repo_config.conf ИНАЧЕ НЕ БУДЕТ РАБОТАТЬ!
+## ОБЯЗАТЕЛЬНО ПЕРЕИМЕНОВАТЬ ПРИМЕР repo_config.conf.sample в repo_config.conf ИНАЧЕ КОНФИГ НЕ БУДЕТ РАБОТАТЬ!
 
 Пример конфиг-файла есть в репозитории, нужно указать через запятую на каждой строке:
 
@@ -26,17 +26,21 @@
 
 ```Barsoomx, DBM-wowcircle, master, DBM-.+```
 
-`.` соответствует любому символу (кроме терминаторов строк)
+Пояснение:
 
-`+` повторяет токен (.) от одного до неограниченного числа раз, столько раз, сколько возможно (жадно)
+Токен `.` соответствует любому символу (кроме терминаторов строк)
+
+`+` повторяет токен `.` от одного до неограниченного числа раз, столько раз, сколько возможно (жадно)
 
 Пример с wildcard (Есть папка Details и папки Details-...)
 
 ```Bunny67, Details-WotLK, master, Details.*```
 
-`.` соответствует любому символу (кроме конца строки)
+Пояснение:
 
-`*` повторяет токен (.) от нуля до неограниченного числа раз, столько раз, сколько возможно (жадно) 
+Токен `.` соответствует любому символу (кроме конца строки)
+
+`*` повторяет токен `.` от нуля до неограниченного числа раз, столько раз, сколько возможно (жадно) 
 
 Пример для двух папок (В ElvUI много аддонов, чтобы не удалить лишнее нужно указать конкретные папки разделяя их | )
 
@@ -74,7 +78,9 @@ An example for my repository, many folders named DBM-..., regex would be DBM-.+
 
 ```Barsoomx, DBM-wowcircle, master, DBM-.+```
 
-`.` matches any character (except for line terminators)
+Explanation:
+
+Token `.` matches any character (except for line ending)
 
 `+` matches the previous token between one and unlimited times, as many times as possible (greedy)
 
@@ -82,7 +88,9 @@ An example with wildcard (there is a Details folder AND Details-... folders, hen
 
 ```Bunny67, Details-WotLK, master, Details.*```
 
-`.` matches any character (except for line terminators)
+Explanation:
+
+Token `.` matches any character (except for line ending)
 
 `*` matches the token (.) between zero and unlimited times, as many times as possible (greedy)
 

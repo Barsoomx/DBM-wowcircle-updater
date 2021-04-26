@@ -26,17 +26,17 @@
 
 ```Barsoomx, DBM-wowcircle, master, DBM-.+```
 
-. соответствует любому символу (кроме терминаторов строк)
+`.` соответствует любому символу (кроме терминаторов строк)
 
-+ повторяет токен (.) от одного до неограниченного числа раз, столько раз, сколько возможно (жадно)
+`+` повторяет токен (.) от одного до неограниченного числа раз, столько раз, сколько возможно (жадно)
 
 Пример с wildcard (Есть папка Details и папки Details-...)
 
 ```Bunny67, Details-WotLK, master, Details.*```
 
-. соответствует любому символу (кроме конца строки)
+`.` соответствует любому символу (кроме конца строки)
 
-* повторяет токен (.) от нуля до неограниченного числа раз, столько раз, сколько возможно (жадно) 
+`*` повторяет токен (.) от нуля до неограниченного числа раз, столько раз, сколько возможно (жадно) 
 
 Пример для двух папок (В ElvUI много аддонов, чтобы не удалить лишнее нужно указать конкретные папки разделяя их | )
 
@@ -74,17 +74,17 @@ An example for my repository, many folders named DBM-..., regex would be DBM-.+
 
 ```Barsoomx, DBM-wowcircle, master, DBM-.+```
 
-. matches any character (except for line terminators)
+`.` matches any character (except for line terminators)
 
-+ matches the previous token between one and unlimited times, as many times as possible (greedy)
+`+` matches the previous token between one and unlimited times, as many times as possible (greedy)
 
 An example with wildcard (there is a Details folder AND Details-... folders, hence the need to .* )
 
 ```Bunny67, Details-WotLK, master, Details.*```
 
-. matches any character (except for line terminators)
+`.` matches any character (except for line terminators)
 
-* matches the token (.) between zero and unlimited times, as many times as possible (greedy)
+`*` matches the token (.) between zero and unlimited times, as many times as possible (greedy)
 
 An example for two folders (ElvUI has a lot of add-ons, in order not to delete unnecessary folders you need to explicitly specify required folders separating them with | )
 

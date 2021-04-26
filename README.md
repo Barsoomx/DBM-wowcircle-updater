@@ -64,7 +64,7 @@ Do not specify any arguments at startup, just double click or launch from cmd
 
 You can download standalone executable file in the "Releases" tab 
 
-## IT IS MANDATORY TO RENAME THE EXAMPLE repo_config.conf.sample in repo_config.conf OTHERWISE THE CONFIG WILL NOT WORK! 
+## IT IS MANDATORY TO RENAME THE EXAMPLE repo_config.conf.sample TO repo_config.conf OTHERWISE THE CONFIG WILL NOT WORK! 
 
 An example of a config file is in the repository, for every repository you need to specify these parameters separated by commas on each line(1 line = 1 repository):
 

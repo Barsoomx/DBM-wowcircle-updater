@@ -63,12 +63,14 @@ def map_directory(repo_name, folder_glob):
         backups_folder = Path(f"./repositories/{repo_name}-backups/")
         print("BACKUP: Cleaning older backups if they exist... Keeping only last 3")
 
-        sorted_backups = [entry for entry in sorted(backups_folder.iterdir(), key=lambda x: x.name, reverse=True)]
-        for path in sorted_backups[3:]:
-            print(f"BACKUP: removing {path}")
-            shutil.rmtree(path)
+        if backups_folder.is_dir():
+            sorted_backups = [entry for entry in sorted(backups_folder.iterdir(), key=lambda x: x.name, reverse=True)]
 
-        print("BACKUP: Backup clean complete.")
+            for path in sorted_backups[3:]:
+                print(f"BACKUP: removing {path}")
+                shutil.rmtree(path)
+
+            print("BACKUP: Backup clean complete.")
 
         return addons
 

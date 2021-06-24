@@ -13,7 +13,7 @@ def_repositories = {
         "github_user": "Barsoomx",
         "repo_name": "DBM-wowcircle",
         "branch": "master",
-        "folder_glob": r"DBM-*"
+        "folder_glob": r"DBM-.+"
     },
 
 }
